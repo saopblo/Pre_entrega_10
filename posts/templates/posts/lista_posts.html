@@ -1,14 +1,27 @@
 {% extends "posts/base.html" %}
 
+{% block title %}Listado de posts | Mi Blog{% endblock %}
+
 {% block content %}
- <h1>Últimos posts</h1>
- {% for post in posts %}
- <article>
- <h2>{{ post.titulo }}</h2>
- <p>Publicado el {{ post.fecha_creacion|date:"d/m/Y"}}</p>
- <p>{{ post.contenido|truncatewords:30 }}</p>
- </article>
- {% empty %}
- <p>Todavía no hay posts publicados.</p>
- {% endfor %}
+<h1>Listado de posts</h1>
+<a href="{% url 'crear_post' %}">Crear nuevo post</a>
+
+{% for post in posts %}
+<article>
+{% if post.imagen %}
+<img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" width="250" />
+{% endif %}
+<h2>
+<a href="{% url 'detalle_post' post.slug %}">
+{{ post.titulo }}
+</a>
+</h2>
+<p>{{ post.contenido|truncatewords:30 }}</p>
+<p>Autor: {{ post.autor }}</p>
+<p>Estado: {{ post.estado }}</p>
+<p>Fecha: {{ post.fecha_creacion }}</p>
+</article>
+{% empty %}
+<p>No hay posts cargados.</p>
+{% endfor %}
 {% endblock %}
