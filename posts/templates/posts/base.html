@@ -17,6 +17,23 @@
             <a href="{% url 'inicio' %}">Inicio</a>
             <a href="{% url 'lista_posts' %}">Posts</a>
             <a href="{% url 'acerca' %}">Acerca de</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'crear_post' %}">Crear Post</a>
+            <div class="user-menu">
+                {% if user.avatar and user.avatar.imagen %}
+                    <img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="avatar-thumb">
+                {% else %}
+                    <span class="avatar-placeholder">👤</span>
+                {% endif %}
+                <span>Hola, <strong>{{ user.username }}</strong></span>
+                <a href="{% url 'accounts:editar_perfil' %}">Editar Perfil</a>
+                <a href="{% url 'accounts:agregar_avatar' %}">Cambiar Avatar</a>
+                <a href="{% url 'accounts:logout' %}">Cerrar Sesión</a>
+            </div>
+            {% else %}
+            <a href="{% url 'accounts:login' %}">Iniciar Sesión</a>
+            <a href="{% url 'accounts:registro' %}">Registrarse</a>
+            {% endif %}
         </nav>
     </header>
 

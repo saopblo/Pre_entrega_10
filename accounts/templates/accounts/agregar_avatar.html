@@ -1,0 +1,10 @@
+{% extends "posts/base.html" %}
+{% block title %}Subir avatar{% endblock %}
+{% block content %}
+<h1>Subir avatar</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar foto de perfil</button>
+</form>
+{% endblock %}

@@ -201,6 +201,13 @@ footer p {
     margin: 0;
 }
 
+.avatar-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 /* Diseño responsive para móviles */
 @media (max-width: 640px) {
     header, .navbar {
